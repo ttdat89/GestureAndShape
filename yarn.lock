@@ -2642,7 +2642,7 @@ inquirer@^3.0.6:
     strip-ansi "^4.0.0"
     through "^2.3.6"
 
-invariant@^2.2.2, invariant@^2.2.4:
+invariant@^2.2.2, invariant@^2.2.4, invariant@^2.2.x:
   version "2.2.4"
   resolved "https://registry.yarnpkg.com/invariant/-/invariant-2.2.4.tgz#610f3c92c9359ce1db616e538008d23ff35158e6"
   integrity sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA==
@@ -5037,6 +5037,13 @@ react-is@^16.6.3:
   version "16.7.0"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.7.0.tgz#c1bd21c64f1f1364c6f70695ec02d69392f41bfa"
   integrity sha512-Z0VRQdF4NPDoI0tsXVMLkJLiwEBa+RP66g0xDHxgxysxSoCUccSten4RTF/UFvZF1dZvZ9Zu1sx+MDXwcOR34g==
+
+react-native-shake@^3.2.4:
+  version "3.2.4"
+  resolved "https://registry.yarnpkg.com/react-native-shake/-/react-native-shake-3.2.4.tgz#e28ca0dc82f3de9e88e9b6cc28709abb9832b6df"
+  integrity sha512-QYy/aUK49JTDWFGAgxVAJRjXJk30ILgIZDIisrHXj/PW4OsJj0ocBRenB6hIfv5xtB7WFL0MGoWPJWnB9tb0uw==
+  dependencies:
+    invariant "^2.2.x"
 
 react-native@0.58.3:
   version "0.58.3"

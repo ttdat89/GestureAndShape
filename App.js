@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, PanResponder} from 'react-native';
-import {Observable} from 'rxjs/Rx';
-import {random, TAP_DELAY} from './utils'
+import {StyleSheet, View} from 'react-native';
+import RNShake from 'react-native-shake';
+import {random} from './utils'
 import GestureSquare from './Square'
 import GestureCircle from './Circle'
 import {handleGesture} from "./handleGesture";
@@ -34,6 +34,16 @@ class MainView extends Component {
   //     })
   //   }
   // }
+
+  componentDidMount() {
+    RNShake.addEventListener('ShakeEvent', () => {
+      this.setState({shapes: []})
+    })
+  }
+
+  componentWillUnmount() {
+    RNShake.removeEventListener('ShakeEvent')
+  }
 
   onTap(data) {
     const v = this.createShape({

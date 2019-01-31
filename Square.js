@@ -1,9 +1,8 @@
 import React from "react";
 import {getWithTimeout} from "./networking";
-import {Image, PanResponder, View} from "react-native";
+import {Image} from "react-native";
 import {handleGesture} from "./handleGesture";
 import {randomColor} from "./utils";
-import {Observable} from "rxjs";
 
 export class Square extends React.PureComponent {
 
