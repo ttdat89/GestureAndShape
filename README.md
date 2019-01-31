@@ -12,7 +12,7 @@
 
 Extra tasks if time allows:
 1. [ ] When a user taps the screen, add an animation for the shapes that appear
-2. [ ] Remove all shapes when shakes device
+2. [x] Remove all shapes when shakes device
 3. [x] Be able to move a shape around
 4. [ ] A user can use a pinch action to enlarge or shrink the size of the shape
 5. [x] Working app for both iOS and Android
