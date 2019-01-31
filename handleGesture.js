@@ -3,6 +3,9 @@ import {PanResponder} from "react-native";
 import {Observable} from "rxjs";
 import {TAP_DELAY} from "./utils";
 
+/**
+ * This is a high order component will offer an ability to handle gesture for wrapped component
+ */
 export const handleGesture = (WrappedComponent) => {
   return class extends React.Component {
     constructor() {
@@ -25,13 +28,11 @@ export const handleGesture = (WrappedComponent) => {
           })
         },
         onPanResponderMove: (evt, gestureState) => {
-          console.log('child move:', evt.nativeEvent)
           if (!!this.comp.onMove)
             this.comp.onMove(evt)
         },
         onPanResponderTerminationRequest: (evt, gestureState) => false,
         onPanResponderRelease: (evt, gestureState) => {
-          // console.log('release:', evt.nativeEvent)
           this.emitter.next({
             position: {
               left: evt.nativeEvent.locationX,
@@ -50,6 +51,9 @@ export const handleGesture = (WrappedComponent) => {
       });
     }
 
+    /**
+     * Use Rxjs debounce to handle tap and double tap
+     */
     initObservable() {
       this.debounceReturnedData$ = Observable.create(e => this.emitter = e)
         .map(val => {

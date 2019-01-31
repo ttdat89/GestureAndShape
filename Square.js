@@ -25,6 +25,9 @@ export class Square extends React.PureComponent {
     this.getImage()
   }
 
+  /**
+   * This function is the duplicated one of Circle's onMove function. Will move to high order component for the reuse later
+   */
   onMove(evt) {
     const {pageX, pageY} = evt.nativeEvent
     if (this.lastPositionX != null && this.lastPositionY != null) {

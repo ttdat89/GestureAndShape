@@ -45,6 +45,9 @@ class MainView extends Component {
     RNShake.removeEventListener('ShakeEvent')
   }
 
+  /**
+   * Handle tap gesture to create a shape on the screen
+   */
   onTap(data) {
     const v = this.createShape({
       left: data.position.left,
@@ -78,6 +81,9 @@ class MainView extends Component {
     }
   }
 
+  /**
+   * Create shape and its size randomly
+   */
   createShape(position, layer) {
     const rand = random(0, 1)
     const size = random(SHAPE_SIZE.min, SHAPE_SIZE.max)
