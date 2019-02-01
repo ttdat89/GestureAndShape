@@ -1,6 +1,6 @@
 import React from "react";
 import {getWithTimeout} from "./networking";
-import {Image} from "react-native";
+import {Image, Animated} from "react-native";
 import {handleGesture} from "./handleGesture";
 import {randomColor} from "./utils";
 
@@ -15,6 +15,8 @@ export class Square extends React.PureComponent {
     }
     this.lastPositionX = null
     this.lastPositionY = null
+
+    this.scale = new Animated.Value(0)
   }
 
   onDoubleTap() {
@@ -23,6 +25,9 @@ export class Square extends React.PureComponent {
 
   componentDidMount() {
     this.getImage()
+    Animated.spring(this.scale, {
+      toValue: 1
+    }).start()
   }
 
   /**
@@ -64,7 +69,7 @@ export class Square extends React.PureComponent {
 
   render() {
     const {s, panHandlers} = this.props
-    return <Image
+    return <Animated.Image
       {...panHandlers}
       source={!!this.state.imageUrl ? {uri: this.state.imageUrl} : null}
       key={s.layer}
@@ -79,6 +84,16 @@ export class Square extends React.PureComponent {
           translateY: this.state.deltaY
         }, {
           translateX: this.state.deltaX,
+        }, {
+          scaleX: this.scale.interpolate({
+            inputRange: [0, 0.5, 1],
+            outputRange: [0.8, 1.2, 1]
+          })
+        }, {
+          scaleY: this.scale.interpolate({
+            inputRange: [0, 0.5, 1],
+            outputRange: [0.8, 1.2, 1]
+          })
         }]
       }}/>
   }

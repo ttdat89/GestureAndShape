@@ -1,6 +1,6 @@
 import React from "react";
 import {getWithTimeout} from "./networking";
-import {View} from "react-native";
+import {View, Animated} from "react-native";
 import {handleGesture} from "./handleGesture";
 import {randomColor} from "./utils";
 
@@ -8,12 +8,14 @@ export class Circle extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      backgroundColor: 'white',
+      backgroundColor: 'black',
       deltaX: 0,
       deltaY: 0,
     }
     this.lastPositionX = null
     this.lastPositionY = null
+
+    this.scale = new Animated.Value(0)
   }
 
   getColor() {
@@ -31,6 +33,9 @@ export class Circle extends React.PureComponent {
 
   componentDidMount() {
     this.getColor()
+    Animated.spring(this.scale, {
+      toValue: 1
+    }).start()
   }
 
   onDoubleTap() {
@@ -61,7 +66,7 @@ export class Circle extends React.PureComponent {
 
   render() {
     const {s, panHandlers} = this.props
-    return <View
+    return <Animated.View
       {...panHandlers}
       key={s.layer}
       style={{
@@ -76,6 +81,16 @@ export class Circle extends React.PureComponent {
           translateY: this.state.deltaY
         }, {
           translateX: this.state.deltaX,
+        }, {
+          scaleX: this.scale.interpolate({
+            inputRange: [0, 0.5, 1],
+            outputRange: [0.8, 1.2, 1]
+          })
+        }, {
+          scaleY: this.scale.interpolate({
+            inputRange: [0, 0.5, 1],
+            outputRange: [0.8, 1.2, 1]
+          })
         }]
       }}/>
   }
