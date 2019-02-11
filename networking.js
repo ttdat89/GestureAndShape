@@ -1,4 +1,4 @@
-const TIMEOUT = 30000
+const TIMEOUT = 10000
 
 function timeout(request, duration, api) {
   return new Promise((resolve) => {

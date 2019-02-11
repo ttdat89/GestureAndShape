@@ -1,7 +1,8 @@
-import React from "react";
-import {PanResponder} from "react-native";
-import {Observable} from "rxjs";
-import {TAP_DELAY} from "./utils";
+import React from "react"
+import {PanResponder} from "react-native"
+import {Observable} from "rxjs"
+import {map, debounceTime} from 'rxjs/operators'
+import {TAP_DELAY} from "./utils"
 
 /**
  * This is a high order component will offer an ability to handle gesture for wrapped component
@@ -55,14 +56,14 @@ export const handleGesture = (WrappedComponent) => {
      * Use Rxjs debounce to handle tap and double tap
      */
     initObservable() {
-      this.debounceReturnedData$ = Observable.create(e => this.emitter = e)
-        .map(val => {
-          this.numberOfClick++
-          return val
-        })
-        .debounceTime(TAP_DELAY)
-        .subscribe(data => {
-          console.log('end time', this.numberOfClick)
+      this.debounceReturnedData$ = new Observable(e => this.emitter = e)
+        .pipe(
+          map(val => {
+            this.numberOfClick++
+            return val
+          }),
+          debounceTime(TAP_DELAY)
+        ).subscribe(data =>{
           if (this.numberOfClick === 2) {
             if (!!this.comp.onTap)
               this.comp.onTap(data)
@@ -73,6 +74,25 @@ export const handleGesture = (WrappedComponent) => {
           }
           this.numberOfClick = 0
         })
+
+      // this.debounceReturnedData$ = Observable.create(e => this.emitter = e)
+      //   .map(val => {
+      //     this.numberOfClick++
+      //     return val
+      //   })
+      //   .debounceTime(TAP_DELAY)
+      //   .subscribe(data => {
+      //     console.log('end time', this.numberOfClick)
+      //     if (this.numberOfClick === 2) {
+      //       if (!!this.comp.onTap)
+      //         this.comp.onTap(data)
+      //     } else if (this.numberOfClick >= 4) {
+      //       console.log('double tap')
+      //       if (!!this.comp.onDoubleTap)
+      //         this.comp.onDoubleTap(data)
+      //     }
+      //     this.numberOfClick = 0
+      //   })
     }
 
     render() {
