@@ -71,6 +71,9 @@ export class Square extends React.PureComponent {
     const {s, panHandlers} = this.props
     return <Animated.Image
       {...panHandlers}
+      onError={err => {
+        this.setState({backgroundColor: randomColor(), imageUrl: null})
+      }}
       source={!!this.state.imageUrl ? {uri: this.state.imageUrl} : null}
       key={s.layer}
       style={{
